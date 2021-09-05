@@ -3,6 +3,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const routers = require("./routers/index");
 const connectDatabase = require("./helpers/database/connectDatabase");
+const customErrorHandler = require("./middlewares/errors/customErrorHandler");
 
 const app = express();
 
@@ -22,6 +23,9 @@ connectDatabase();
 // Routers Middleware
 app.use("/api", routers);
 // app.use("/api/v2", routers); example
+
+// Error Handler
+app.use(customErrorHandler);
 
 app.listen(PORT, () => {
   console.log(`App started on PORT: ${PORT} -> http://localhost:${PORT}`);
