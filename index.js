@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const routers = require("./routers/index");
 
 const app = express();
 
@@ -12,14 +13,11 @@ app.use(cors());
 dotenv.config({
   path: "./config/env/config.env",
 });
-
 const PORT = process.env.PORT;
 
-app.get("/", (req, res) => {
-  res.status(200).json({
-    message: "Welcome",
-  });
-});
+// Routers Middleware
+app.use("/api", routers);
+// app.use("/api/v2", routers); example
 
 app.listen(PORT, () => {
   console.log(`App started on PORT: ${PORT} -> http://localhost:${PORT}`);
