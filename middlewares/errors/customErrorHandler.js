@@ -2,6 +2,14 @@ const CustomError = require("../../helpers/errors/CustomError");
 
 const customErrorHandler = (err, req, res, next) => {
   let customError = err;
+
+  if (err.code === 11000) {
+    // Mongoose General Error
+    customError = new CustomError(
+      "Dublicate Key Found : Check Your Input",
+      400
+    );
+  }
   if (err.name === "SyntaxError") {
     customError = new CustomError("Unexpected Syntax", 400);
   }

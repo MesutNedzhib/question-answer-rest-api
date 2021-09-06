@@ -12,6 +12,9 @@ const register = asyncErrorHandler(async (req, res, next) => {
     role,
   });
 
+  const token = user.generateJwtFromUser();
+  console.log(token); //current here
+
   res.status(200).json({
     success: true,
     data: user,
