@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const CustomError = require("../helpers/errors/CustomError");
 
 const register = async (req, res, next) => {
   const name = "Caner Kus";
@@ -23,7 +24,9 @@ const register = async (req, res, next) => {
 
 const errorTest = (req, res, next) => {
   // Some code
-  throw new Error("Error 1");
+
+  // Question Does Not Exists
+  return next(new TypeError());
   // Some code
 };
 
