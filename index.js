@@ -7,6 +7,7 @@ const customErrorHandler = require("./middlewares/errors/customErrorHandler");
 
 const app = express();
 
+// Express - Body Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
