@@ -16,14 +16,17 @@ const register = asyncErrorHandler(async (req, res, next) => {
   sendJwtToClient(user, res);
 });
 
-const tokenTest = asyncErrorHandler(async (req, res, next) => {
+const getUser = asyncErrorHandler(async (req, res, next) => {
   res.json({
     success: true,
-    message: "Welcome",
+    data: {
+      id: req.user.id,
+      name: req.user.name,
+    },
   });
 });
 
 module.exports = {
   register,
-  tokenTest,
+  getUser,
 };
