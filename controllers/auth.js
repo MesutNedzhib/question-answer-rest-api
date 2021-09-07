@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const CustomError = require("../helpers/errors/CustomError");
 const asyncErrorHandler = require("express-async-handler");
+const { sendJwtToClient } = require("../helpers/authorization/tokenHelpers");
 
 const register = asyncErrorHandler(async (req, res, next) => {
   const { name, email, password, role } = req.body;
@@ -12,24 +13,17 @@ const register = asyncErrorHandler(async (req, res, next) => {
     role,
   });
 
-  const token = user.generateJwtFromUser();
-  console.log(token); //current here
-
-  res.status(200).json({
-    success: true,
-    data: user,
-  });
+  sendJwtToClient(user, res);
 });
 
-const errorTest = asyncErrorHandler((req, res, next) => {
-  // Some code
-
-  // Question Does Not Exists
-  return next(new TypeError("TypeError"));
-  // Some code
+const tokenTest = asyncErrorHandler(async (req, res, next) => {
+  res.json({
+    success: true,
+    message: "Welcome",
+  });
 });
 
 module.exports = {
   register,
-  errorTest,
+  tokenTest,
 };
