@@ -36,6 +36,21 @@ const login = expressAsyncHandler(async (req, res, next) => {
   sendJwtToClient(user, res);
 });
 
+const logout = expressAsyncHandler(async (req, res, next) => {
+  const { NODE_ENV } = process.env;
+  return res
+    .status(200)
+    .cookie({
+      httpOnly: true,
+      exipres: new Date(Date.now()),
+      secure: NODE_ENV === "development" ? false : true,
+    })
+    .json({
+      success: true,
+      message: "Logout Successfull",
+    });
+});
+
 const getUser = asyncErrorHandler(async (req, res, next) => {
   res.json({
     success: true,
@@ -50,4 +65,5 @@ module.exports = {
   register,
   getUser,
   login,
+  logout,
 };
