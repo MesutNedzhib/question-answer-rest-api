@@ -61,9 +61,19 @@ const getUser = asyncErrorHandler(async (req, res, next) => {
   });
 });
 
+const imageUpload = asyncErrorHandler(async (req, res, next) => {
+  // Image Upload Success
+
+  res.status(200).json({
+    success: true,
+    message: "Image Upload Successfull",
+  });
+});
+
 module.exports = {
   register,
   getUser,
   login,
   logout,
+  imageUpload,
 };
