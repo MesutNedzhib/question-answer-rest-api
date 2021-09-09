@@ -1,6 +1,5 @@
 const User = require("../models/User");
 const CustomError = require("../helpers/errors/CustomError");
-const asyncErrorHandler = require("express-async-handler");
 const { sendJwtToClient } = require("../helpers/authorization/tokenHelpers");
 const expressAsyncHandler = require("express-async-handler");
 const {
@@ -9,7 +8,7 @@ const {
 } = require("../helpers/input/inputHelpers");
 const sendEmail = require("../helpers/libraries/sendEmail");
 
-const register = asyncErrorHandler(async (req, res, next) => {
+const register = expressAsyncHandler(async (req, res, next) => {
   const { name, email, password, role } = req.body;
 
   const user = await User.create({
@@ -52,7 +51,7 @@ const logout = expressAsyncHandler(async (req, res, next) => {
     });
 });
 
-const getUser = asyncErrorHandler(async (req, res, next) => {
+const getUser = expressAsyncHandler(async (req, res, next) => {
   res.json({
     success: true,
     data: {
@@ -62,7 +61,7 @@ const getUser = asyncErrorHandler(async (req, res, next) => {
   });
 });
 
-const imageUpload = asyncErrorHandler(async (req, res, next) => {
+const imageUpload = expressAsyncHandler(async (req, res, next) => {
   const user = await User.findByIdAndUpdate(
     req.user.id,
     {
@@ -82,7 +81,7 @@ const imageUpload = asyncErrorHandler(async (req, res, next) => {
 });
 
 // Forgot password
-const forgotPassword = asyncErrorHandler(async (req, res, next) => {
+const forgotPassword = expressAsyncHandler(async (req, res, next) => {
   const resetEmail = req.body.email;
 
   const user = await User.findOne({ email: resetEmail });
@@ -124,7 +123,7 @@ const forgotPassword = asyncErrorHandler(async (req, res, next) => {
   }
 });
 
-const resetPassword = asyncErrorHandler(async (req, res, next) => {
+const resetPassword = expressAsyncHandler(async (req, res, next) => {
   const { resetPasswordToken } = req.query;
 
   const { password } = req.body;
