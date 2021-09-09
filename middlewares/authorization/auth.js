@@ -4,6 +4,9 @@ const {
   isTokenIncluded,
   getAccessTokenFromHeader,
 } = require("../../helpers/authorization/tokenHelpers");
+const expressAsyncHandler = require("express-async-handler");
+const User = require("../../models/User");
+
 const getAccessToRoute = (req, res, next) => {
   const { JWT_SECRET_KEY } = process.env;
   // 401 , 403
@@ -29,6 +32,19 @@ const getAccessToRoute = (req, res, next) => {
     next();
   });
 };
+
+const getAdminAccess = expressAsyncHandler(async (req, res, next) => {
+  const { id } = req.user;
+  const user = await User.findById(id);
+
+  if (user.role !== "admin") {
+    return next(new CustomError("Only admins can acccess this route", 403));
+  }
+
+  next();
+});
+
 module.exports = {
   getAccessToRoute,
+  getAdminAccess,
 };
