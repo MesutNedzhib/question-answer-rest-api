@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const slugify = require("slugify");
 
 const Schema = mongoose.Schema;
 
@@ -26,6 +27,24 @@ const QuestionSchema = new Schema({
     required: true,
     ref: "User",
   },
+});
+
+// Mongoose Methods
+QuestionSchema.methods.makeSlug = function () {
+  return slugify(this.title, {
+    replacement: "-",
+    remove: /[*+~.()'"!:@]/g,
+    lower: true,
+  });
+};
+
+// Mongoose Pre Hooks
+QuestionSchema.pre("save", function (next) {
+  if (!this.isModified("title")) {
+    next();
+  }
+  this.slug = this.makeSlug();
+  next();
 });
 
 module.exports = mongoose.model("Question", QuestionSchema);
