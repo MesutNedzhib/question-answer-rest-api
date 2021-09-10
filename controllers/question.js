@@ -26,10 +26,37 @@ const getAllQuestions = expressAsyncHandler(async (req, res, next) => {
 
 const getSingleQuestion = expressAsyncHandler(async (req, res, next) => {
   const question = req.data;
-  
+
   res.status(200).json({
     success: true,
     data: question,
+  });
+});
+
+const editQuestion = expressAsyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+  const { title, content } = req.body;
+
+  let question = await Question.findById(id);
+
+  question.title = title;
+  question.content = content;
+
+  question = await question.save();
+
+  res.status(200).json({
+    success: true,
+    data: question,
+  });
+});
+
+const deleteQuestion = expressAsyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+  await Question.findByIdAndDelete(id);
+
+  res.status(200).json({
+    success: true,
+    message: "Question Delete Operation Successfull",
   });
 });
 
@@ -37,4 +64,6 @@ module.exports = {
   askNewQuestion,
   getAllQuestions,
   getSingleQuestion,
+  editQuestion,
+  deleteQuestion,
 };
