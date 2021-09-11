@@ -5,7 +5,7 @@ const searchHelper = (searchKey, query, req) => {
     const regex = new RegExp(req.query.search, "i");
     searchObject[searchKey] = regex;
 
-    return (query = query.where(searchObject));
+    return query.where(searchObject);
   }
   return query;
 };
@@ -25,7 +25,7 @@ const questionSortHelper = (query, req) => {
   return query.sort("-createdAt");
 };
 
-const paginationHelper = async (model, query, req) => {
+const paginationHelper = async (totalDocuments, query, req) => {
   // 1 2 3 4 5 6 7 8 9 10 - Questions
   // page = 2, limit 5 - startIndex 2, endIndex 10
   // skip(2)
@@ -38,7 +38,7 @@ const paginationHelper = async (model, query, req) => {
   const endIndex = page * limit;
 
   const pagination = {};
-  const total = await model.countDocuments();
+  const total = totalDocuments;
 
   if (startIndex > 0) {
     pagination.previous = {
@@ -55,7 +55,8 @@ const paginationHelper = async (model, query, req) => {
   }
 
   return {
-    query: query.skip(startIndex).limit(limit),
+    query:
+      query === undefined ? undefined : query.skip(startIndex).limit(limit),
     pagination: pagination,
   };
 };

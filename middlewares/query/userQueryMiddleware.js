@@ -1,26 +1,12 @@
 const expressAsyncHandler = require("express-async-handler");
-const {
-  searchHelper,
-  populateHelper,
-  questionSortHelper,
-  paginationHelper,
-} = require("./queryMiddlewareHelepers");
+const { searchHelper, paginationHelper } = require("./queryMiddlewareHelepers");
 
-const questionQueryMiddleware = function (model, options) {
+const userQueryMiddleWare = function (model, options) {
   return expressAsyncHandler(async function (req, res, next) {
-    // Initial Query
     let query = model.find();
 
-    // Search
-    query = searchHelper("title", query, req);
-
-    // Populate
-    if (options && options.population) {
-      query = populateHelper(query, options.population);
-    }
-
-    // Sort
-    query = questionSortHelper(query, req);
+    // Search by name
+    query = searchHelper("name", query, req);
 
     // Pagination
     const total = await model.countDocuments();
@@ -36,10 +22,11 @@ const questionQueryMiddleware = function (model, options) {
       pagination: pagination,
       data: queryResults,
     };
+
     next();
   });
 };
 
 module.exports = {
-  questionQueryMiddleware,
+  userQueryMiddleWare,
 };
