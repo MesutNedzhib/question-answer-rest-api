@@ -72,6 +72,16 @@ const getAllQuestions = expressAsyncHandler(async (req, res, next) => {
   // skip(2)
   // limit(2)
 
+  // Sort : req.query.sortBy most-answered most-liked
+  const sortKey = req.query.sortBy;
+  if (sortKey === "most-answered") {
+    query = query.sort("-answerCount -createdAt");
+  }
+  if (sortKey === "most-liked") {
+    query = query.sort("-likeCount -createdAt");
+  } else {
+    query = query.sort("-createdAt");
+  }
   const questions = await query;
   // const questions = await Question.find().where({title:"Questions 3 - Title"});
 
@@ -129,6 +139,7 @@ const likeQuestion = expressAsyncHandler(async (req, res, next) => {
     return next(new CustomError("You already liked this question", 400));
   }
   question.likes.push(req.user.id);
+  question.likeCount = question.likes.length;
 
   await question.save();
 
@@ -150,6 +161,7 @@ const undoLikeQuestion = expressAsyncHandler(async (req, res, next) => {
   }
   const index = question.likes.indexOf(req.user.id);
   question.likes.splice(index, 1);
+  question.likeCount = question.likes.length;
 
   await question.save();
 
