@@ -58,6 +58,8 @@ const paginationHelper = async (totalDocuments, query, req) => {
     query:
       query === undefined ? undefined : query.skip(startIndex).limit(limit),
     pagination: pagination,
+    startIndex,
+    limit,
   };
 };
 
