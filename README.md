@@ -26,6 +26,8 @@ The Question - Answer is a REST Api, created similar to stackoverflow, like idea
  
 - User
   - Get all users
+    - Search by name
+    - Pagination
   - Get single user
 
 - Admin
@@ -35,7 +37,7 @@ The Question - Answer is a REST Api, created similar to stackoverflow, like idea
 - Questions
   - Create a new question
   - Get all questions
-    - Search
+    - Search by title
     - Sort
     - Populate
     - Pagination
@@ -48,8 +50,6 @@ The Question - Answer is a REST Api, created similar to stackoverflow, like idea
 - Answers
   - Create a new answer
   - Get all answers
-    - Search
-    - Sort
     - Populate
     - Pagination
   - Get single answer 
