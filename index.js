@@ -32,6 +32,10 @@ app.use(customErrorHandler);
 // Static Files
 app.use(express.static(path.join(__dirname, "public")));
 
+app.get("/", (req, res) => {
+  res.send("Welcome to Question Answer Api - created by: Mesut Nedzhib");
+});
+
 app.listen(PORT, () => {
   console.log(`App started on PORT: ${PORT} -> http://localhost:${PORT}`);
 });
