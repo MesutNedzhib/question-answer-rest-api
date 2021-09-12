@@ -58,7 +58,22 @@ The Question - Answer is a REST Api, created similar to stackoverflow, like idea
   - Like 
   - Undo like 
 
+## Future Features
+- Hide the questions or answers of blocked user
+- etc ...
 
-![Alt Text](https://djcodes.files.wordpress.com/2015/03/git_remote1.png)
+## Dependencies
+- Dotenv
+- Express
+- Cors
+- Nodemon
+- Express Async Handler
+- Mongoose
+- BcryptJs
+- Json Web Token 
+- Multer
+- Nodemailer
+- Slugify
+
 
 
