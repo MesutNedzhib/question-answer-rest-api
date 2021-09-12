@@ -59,3 +59,6 @@ The Question - Answer is a REST Api, created similar to stackoverflow, like idea
   - Undo like 
 
 
+![Alt Text](https://djcodes.files.wordpress.com/2015/03/git_remote1.png)
+
+
