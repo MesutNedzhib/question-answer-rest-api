@@ -35,7 +35,10 @@ The Question - Answer is a REST Api, created similar to stackoverflow, like idea
 - Questions
   - Create a new question
   - Get all questions
-    - sort 
+    - Search
+    - Sort
+    - Populate
+    - Pagination
   - Get single question 
   - Edit 
   - Delete 
@@ -45,6 +48,10 @@ The Question - Answer is a REST Api, created similar to stackoverflow, like idea
 - Answers
   - Create a new answer
   - Get all answers
+    - Search
+    - Sort
+    - Populate
+    - Pagination
   - Get single answer 
   - Edit 
   - Delete 
