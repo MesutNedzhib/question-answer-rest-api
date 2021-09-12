@@ -35,6 +35,7 @@ The Question - Answer is a REST Api, created similar to stackoverflow, like idea
 - Questions
   - Create a new question
   - Get all questions
+    - sort 
   - Get single question 
   - Edit 
   - Delete 
