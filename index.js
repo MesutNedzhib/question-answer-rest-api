@@ -33,7 +33,7 @@ app.use(customErrorHandler);
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
-  res.send("Welcome to Question Answer Api - created by: Mesut Nedzhib");
+  res.send("Welcome to Question - Answer REST API - created by: Mesut Nedzhib");
 });
 
 app.listen(PORT, () => {
