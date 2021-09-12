@@ -8,7 +8,6 @@ const CustomError = require("./helpers/errors/CustomError");
 const dotenv = require("dotenv");
 
 const path = "./dummy/";
-console.log("ff");
 
 const users = JSON.parse(fs.readFileSync(path + "users.json"));
 const questions = JSON.parse(fs.readFileSync(path + "questions.json"));
