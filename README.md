@@ -14,7 +14,7 @@ The Question - Answer is a REST Api, created similar to stackoverflow, like idea
 3. Start testing. 
 
 ## Features
-The REST API has the following routes and functionalities:
+The Question Answer REST API has the following routes and functionalities:
 - Authorization
   - Register 
   - Login 
